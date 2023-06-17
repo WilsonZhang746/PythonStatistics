@@ -284,8 +284,161 @@ from scipy.stats import poisson
 
 
 
+### Lecture 4. Normal distribution
+
+#Histogram plotting Normal Distribution
+
+import numpy as np
+import matplotlib.pyplot as plt
+  
+# Mean of the distribution
+Mean = 32
+ 
+# satndard deviation of the distribution
+Standard_deviation  = 8
+  
+# size
+size = 3200
+  
+# creating a normal distribution data
+values = np.random.normal(Mean, Standard_deviation, size)
+  
+# plotting histograph
+plt.hist(values, 10)
+# plotting mean line
+plt.axvline(values.mean(), color='k', linestyle='dashed', linewidth=2)
+plt.show()
 
 
+
+
+#Example 1 using Normal Distribution
+# Suppose student test scores follow Normal probability distribution.
+# with mean 81 and standard deviation 18. 
+# Calculate the Percentage of Students who have scores less than 60
+
+# Solution: scipy.stats.norm() 
+
+# import required libraries
+from scipy.stats import norm
+import numpy as np
+ 
+# Given information
+mean = 81
+std_dev = 18
+total_students = 100
+score = 60
+ 
+# Calculate z-score for 60
+z_score = (score - mean) / std_dev
+ 
+# Calculate the probability of getting a score less than 60
+prob = norm.cdf(z_score)
+ 
+# Calculate the percentage of students who got less than 60 marks
+percent = prob * 100
+
+# Print the result
+print("Percentage of students who got less than 60 marks:", round(percent, 2), "%")
+
+
+
+
+#Example 2: Calculate the Percentage of Students who have scored 
+#More than 95
+
+#To get the percentage of people who have scored more than 95. 
+#We first find the probability of people who have scored less than 95 
+#then we will subtract the probability from 1 to get the percent of 
+# people who have scored more than 95. 
+
+# import required libraries
+from scipy.stats import norm
+import numpy as np
+ 
+# Given information
+mean = 81
+std_dev = 18
+total_students = 100
+score = 95
+ 
+# Calculate z-score for 95
+z_score = (score - mean) / std_dev
+ 
+# Calculate the probability of getting a more than 95
+prob = norm.cdf(z_score)
+ 
+# Calculate the percentage of students who got more than 95 marks
+percent = (1-prob) * 100
+# Print the result
+print("Percentage of students who got more than /95 marks: ", round(percent, 2), " %")
+
+
+
+#Python Code for Percentage of Students who have scored More than 
+#75 and less than 85
+
+# import required libraries
+from scipy.stats import norm
+import numpy as np
+ 
+# Given information
+mean = 81
+std_dev = 18
+total_students = 100
+min_score = 75
+max_score = 85
+ 
+# Calculate z-score for 75
+z_min_score = (min_score - mean) / std_dev
+# Calculate z-score for 85
+z_max_score = (max_score - mean) / std_dev
+ 
+ 
+# Calculate the probability of getting less than 70
+min_prob = norm.cdf(z_min_score)
+ 
+# Calculate the probability of getting  less than 85
+max_prob = norm.cdf(z_max_score)
+ 
+percent = (max_prob-min_prob) * 100
+ 
+# Print the result
+print("Percentage of students who got marks between 75 and 85 is", round(percent, 2), "%")
+
+
+
+
+#Find the score under which there are about 80% of the students' scores
+
+# import required libraries
+from scipy.stats import norm
+import numpy as np
+ 
+# Given information
+mean = 81
+std_dev = 18
+total_students = 100
+q_score = 0.8
+
+ 
+
+#find the z-value with the cumulative probability 50%
+#using norm.ppf() ,which is the inverse of norm.cdf()
+
+z_80 = norm.ppf(q_score)
+
+
+z_80_score = z_80 * std_dev + mean
+
+
+z_80_score
+
+#Alternative way
+
+z_80_score = norm.ppf(q_score, loc = mean, scale = std_dev )
+
+z_80_score
 
 
 
