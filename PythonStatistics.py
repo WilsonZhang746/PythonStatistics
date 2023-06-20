@@ -450,3 +450,124 @@ z_80_score
 
 
 
+
+
+
+### Lecture 5. Shapiro-Wilk test for normality
+
+#NULL hypothesis: Sample is from the normal distributions.(Po>0.05)
+#(Rejected): Sample is not from the normal distributions.
+
+#Example 1
+# import useful library
+import numpy as np
+from scipy.stats import shapiro
+from numpy.random import randn
+ 
+# Create data
+test_data = randn(1000)
+ 
+# conduct the  Shapiro-Wilk Test
+shapiro(test_data)         
+
+#The result does not reject the normality hypothesis
+#as the p-value > 0.05
+
+
+#Example 2
+## import useful library
+import numpy as np
+from numpy.random import poisson
+from numpy.random import seed
+from scipy.stats import shapiro
+from numpy.random import randn
+ 
+seed(0)
+# Create data
+test_data = poisson(5, 200)
+ 
+# conduct the  Shapiro-Wilk Test
+shapiro(test_data)
+
+#normality test is rejected , since p-value < 0.05
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### Lecture 6. Exponential distribution
+
+from scipy.stats import expon 
+import numpy as np
+import matplotlib.pyplot as plt
+
+#scale or beta, is the average time between two events
+# it is the reciprocal of hazard rate lambda in poisson distribution.
+   
+# Random Variates
+R = expon.rvs(scale = 2,  size = 10)
+print ("Random Variates : \n", R)
+  
+
+# PDF
+
+quantile = np.arange (0.01, 3, 0.1)
+
+#The threshold parameter defines the lowest possible value in 
+#an exponential distribution. Some analysts refer to this parameter
+# as the location
+
+#probability density
+Den_city = expon.pdf(quantile,  scale = 1)
+
+plt.plot(quantile, Den_city)
+
+
+
+#cumulative probability 
+quantile = np.arange (0.01, 9, 0.1)
+Cum_prob = expon.cdf(quantile,  scale = 1)
+
+plt.plot(quantile, Cum_prob)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
