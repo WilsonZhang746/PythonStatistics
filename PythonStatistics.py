@@ -557,6 +557,39 @@ plt.plot(quantile, Cum_prob)
 
 
 
+### Lecture 7. Chi-Square test
+
+
+from scipy.stats import chi2_contingency
+ 
+# defining the table
+data = [[32, 20, 17, 10, 7, 3], [56, 39,18, 69, 93, 66]]
+stat, p, dof, expected = chi2_contingency(data)
+ 
+# interpret p-value
+alpha = 0.05
+print("p value is " + str(p))
+if p <= alpha:
+    print('Dependent (reject H0)')
+else:
+    print('Independent (H0 holds true)')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
