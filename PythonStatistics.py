@@ -573,6 +573,112 @@ if p <= alpha:
     print('Dependent (reject H0)')
 else:
     print('Independent (H0 holds true)')
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+### Lecture 8. Beta distribution
+
+#Creating beta continuous random variable
+
+# importing scipy
+from scipy.stats import beta
+import numpy as np
+import matplotlib.pyplot as plt
+  
+
+#Probability density
+#create beta variates
+quantile = np.arange (0.01, 1, 0.1)
+a = 1
+b = 1
+
+R = beta.pdf(quantile, a, b)
+print ("\nProbability Distribution : \n", R)
+
+plt.plot(quantile,R)
+
+
+a = 2
+b = 2
+
+R = beta.pdf(quantile, a, b)
+print ("\nProbability Distribution : \n", R)
+
+plt.plot(quantile,R)
+
+
+
+
+#Cumulative probabilities
+
+quantile = np.arange (0.01, 1, 0.1)
+a = 2
+b = 2
+
+R = beta.cdf(quantile, a, b)
+print ("\nProbability Distribution : \n", R)
+
+plt.plot(quantile,R)
+
+
+
+#getting quantiles from given cumulative probabilities
+
+probs = np.arange (0.01, 1, 0.1)
+a = 2
+b = 2
+
+R = beta.ppf(probs, a, b)
+print ("\nProbability Distribution : \n", R)
+
+plt.plot(probs,R)
+
+
+
+
+
+## Generating Beta random variates
+a = 6
+b = 2
+
+R = beta.rvs(a, b, size = 10)
+print ("Random Variates : \n", R)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
