@@ -678,6 +678,69 @@ print ("Random Variates : \n", R)
 
 
 
+### Lecture 9. Lognormal distribution
+from scipy.stats import lognorm 
+import numpy as np 
+import matplotlib.pyplot as plt
+
+quantile = np.arange (0.01, 10, 0.5) 
+  
+a = 5       #this location refers to lognormal variable, not for the 
+             #log of lognormal variables
+b = 2       #this is the sigma in density function
+  
+# PDF  probability density
+R = lognorm.pdf(quantile, loc=a, s=b) 
+
+plt.plot(quantile, R)
+
+
+#cdf, cumulative probability
+a = 0
+b = 1
+
+R = lognorm.cdf(quantile,loc=a, s=b) 
+plt.plot(quantile, R)
+
+
+
+#ppf to calculate quantiles from given cumulative probabilites
+a = 0
+b = 1
+probs = np.arange (0.01, 1, 0.1)
+
+R = lognorm.ppf(probs,loc=a, s=b) 
+plt.plot(probs, R)
+
+
+
+
+# Random Variates 
+N = 32
+a = 5
+b = 2
+
+R = lognorm.rvs(loc=a, s=b, size=N) 
+print(R) 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
