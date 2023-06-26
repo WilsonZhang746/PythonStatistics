@@ -745,6 +745,76 @@ print(R)
 
 
 
+### Lecture 10. Gamma distribution
+
+from scipy.stats import gamma 
+import numpy as np 
+import matplotlib.pyplot as plt
+
+
+quantile = np.arange (0.01, 10, 0.5) 
+  
+a = 1       # parameter a (shape)
+b = 1       # parameter scale 
+  
+# PDF  probability density
+# pdf(quantile, a , scale) 
+
+R = gamma.pdf(quantile, a = a, scale=b) 
+
+plt.plot(quantile, R)
+
+
+
+#cdf, cumulative probability
+# cdf(quantile, a , scale)
+
+a = 1
+b = 1
+
+R = gamma.cdf(quantile,a=a, scale=b) 
+plt.plot(quantile, R)
+
+
+
+#ppf to calculate quantiles from given cumulative probabilites
+a = 1
+b = 1
+probs = np.arange (0.01, 1, 0.1)
+
+R = gamma.ppf(probs,a=a, scale=b) 
+plt.plot(probs, R)
+
+
+
+
+# Random Variates generation
+N = 32
+a = 3
+b = 2
+
+R = gamma.rvs(a=a, scale=b, size=N) 
+print(R) 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
