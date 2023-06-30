@@ -813,6 +813,114 @@ print(R)
 
 
 
+### Lecture 11. t distribution
+
+from scipy.stats import t
+import numpy as np 
+import matplotlib.pyplot as plt
+
+
+
+# PDF  probability density
+# pdf(quantile, df , loc)
+#loc default 0 
+
+quantile = np.arange (-8, 8, 0.1) 
+df = 10
+loc = 2
+
+R = t.pdf(quantile, df=df) 
+
+plt.plot(quantile, R)
+
+
+R = t.pdf(quantile, df=df, loc=loc) 
+
+plt.plot(quantile, R)
+
+
+
+#cdf, cumulative probability
+# cdf(quantile, df , loc)
+
+quantile = np.arange (-8, 8, 0.1) 
+df = 10
+loc = 2
+
+R = t.cdf(quantile,df=df, loc=loc) 
+plt.plot(quantile, R)
+
+
+#ppf to calculate quantiles from given cumulative probabilites
+df = 10
+loc = 2
+probs = np.arange (0.01, 1, 0.01)
+
+R = t.ppf(probs,df=df, loc=loc) 
+plt.plot(probs, R)
+
+
+
+#random number generation using t.rvs()
+
+test1 = t.rvs(10, size= 10000)
+
+
+fig, ax = plt.subplots(figsize =(12, 9))
+#ax.hist(test, bins = [-4.5, -3.5, -2.5, -1.5, -0.5, 0.5, 1.5, 2.5, 3.5, 4.5])
+ax.hist(test1, bins = 50)
+  
+# Show plot
+plt.show()
+
+
+test2 = t.rvs(df=10, loc = 5, size= 10000)
+
+
+fig, ax = plt.subplots(figsize =(12, 9))
+#ax.hist(test, bins = [-4.5, -3.5, -2.5, -1.5, -0.5, 0.5, 1.5, 2.5, 3.5, 4.5])
+ax.hist(test2, bins = 50)
+  
+# Show plot
+plt.show()
+
+
+
+##Example of t-test of population mean
+
+# A chemical engineer claims that the population mean yield of 
+#a certain batch process is 500 grams per milliliter of raw material.
+#To check this claim he samples 25 batches each month. 
+#If the computed t-value falls between −t0.05 and t0.05, he is 
+#satisfied with this claim. What conclusion should he draw from 
+#a sample that has a mean X-Ba = 518 grams per milliliter and 
+#a sample standard deviation s = 40 grams? Assume the distribution 
+# of yields to be approximately normal.
+
+#Solution : 
+# first we get the critical value of t0.05 
+# using qt(probs, df)
+import math
+
+t_cri = t.ppf( 1-0.05, 24)
+t_cri   #1.71
+
+# then we calculate the sample t test statistics
+t_sample = (518 - 500) / (40/math.sqrt(25))
+t_sample     #2.25
+
+#we can also calcualte the p_value assocated with t_sample
+p_sample = 1 - t.cdf(t_sample, 24)
+p_sample   #0.0169
+
+
+#As t_sample > t_cri, which also means p_sample < 0.05, 
+# engineer is likely to conclude that the process produces 
+# a better product than he thought, i.e. larger than 500 
+
+
+
+
 
 
 
