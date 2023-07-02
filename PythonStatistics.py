@@ -934,6 +934,50 @@ p_sample   #0.0169
 
 
 
+### Lecture 12. Normal quantile-quantile plot
+
+import numpy as np
+import statsmodels.api as sm
+import matplotlib.pyplot as plt
+  
+# np.random generates different random numbers
+# whenever the code is executed
+
+  
+# Random data points from normal distribution generated
+data_points = np.random.normal(6, 2, 100)    
+  
+sm.qqplot(data_points, line='s')
+plt.show()
+
+
+
+# Random data points from logistic distribution generated
+data_points = np.random.logistic(size=100) 
+
+sm.qqplot(data_points, line='s')
+plt.show()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
