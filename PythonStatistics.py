@@ -973,6 +973,68 @@ plt.show()
 
 
 
+### Lecture 13. Descriptive Statistics of Pandas DataFrame
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+ 
+# create dataframe
+data_set = {'Familymember': ['Wilson', 'Shirley', 'Dudu', 'Maomao', 'Miaomiao', 'Mico', 'Mia', 'Mimi'],
+            'Age' : [32,33,20, 22, 10,7, 3, 22],
+            'Income' : [32000, 26000, 20000, 22000, 10000, 18000, 13000,20000 ],
+            'Cost' : [28000, 20000, 15000, 17000, 8000, 12000, 6000,8000]
+            }
+ 
+frame = pd.DataFrame(data_set)
+frame
+ 
+# Describing descriptive statistics of Income
+print("\nDescriptive statistics of Income:\n")
+stats = frame['Income'].describe()
+print(stats)
+
+
+
+# Describing descriptive statistics of whole dataframe
+print("\nDescriptive statistics of whole dataframe:\n")
+stats = frame.describe(include = 'all')
+print(stats)
+
+
+
+#calculate the descriptive statistical data individually.
+
+# Print Count of Income
+print("\nCount of Income:\n")
+counts = frame['Income'].count()
+print(counts)
+  
+# Print mean of Income
+print("\nMean of Income:\n")
+m = frame['Income'].mean()
+print(m)
+  
+# Print maximum value of Income
+print("\nMaximum value of Income:\n")
+mx = frame['Income'].max()
+print(m)
+  
+# Print standard deviation of Income
+print("\nStandard deviation of Income:\n")
+sd = frame['Income'].std()
+print(sd)
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
