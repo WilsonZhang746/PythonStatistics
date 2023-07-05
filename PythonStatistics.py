@@ -1039,9 +1039,57 @@ print(sd)
 
 
 
+### Lecture 14. Create Frequency Tables
+
+# Simple frequency table using value_counts() method
+
+import pandas as pd
+import numpy as np
+
+data_set = {'Familymember': ['Wilson', 'Shirley', 'Dudu', 'Maomao', 'Miaomiao', 'Mico', 'Mia', 'Mimi'],
+            'Age' : [32,33,20, 22, 10,7, 3, 22],
+            'Gender': ['male','female','male','female','male','female','male','male'],
+            'City': ['Molde','Aukra','Molde','Molde','Aukra','Molde','Aukra','Molde'],
+            'Income' : [32000, 26000, 20000, 22000, 10000, 18000, 13000,20000 ],
+            'Cost' : [28000, 20000, 15000, 17000, 8000, 12000, 6000,8000]
+            }
+ 
+frame = pd.DataFrame(data_set)
+frame
+
+
+Gender_count = frame['Gender'].value_counts()
+print(Gender_count)     
+type(Gender_count)      #a Series
+
+
+#One-way frequency table using pandas.crosstab() method
+
+freq_table = pd.crosstab(frame['Gender'], 'Sex')
+  
+freq_table        
+
+type(freq_table)        #a dataframe
 
 
 
+#show frequency table to be in proportions
+
+freq_table = pd.crosstab(frame['Gender'], 'Sex')
+  
+# frequency table in proportion of species
+freq_table= freq_table/len(frame)
+  
+freq_table
+
+
+
+
+#Two-way frequency table using pandas.crosstab() method
+
+freq_table = pd.crosstab(frame['Gender'], frame['City'])
+  
+freq_table
 
 
 
