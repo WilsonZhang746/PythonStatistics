@@ -1105,3 +1105,69 @@ freq_table
 
 
 
+
+
+
+### Lecture 15. Confidence interval of population mean using t distribution 
+
+import numpy as np
+import scipy.stats as st
+
+
+# define sample data
+Income = [32000, 26000, 20000, 22000, 10000, 18000, 13000,20000, 56000, 32000, 27000, 28000, 19000, 30100 ]
+  
+# create 95% confidence interval
+#using st.t.interval()
+st.t.interval(alpha=0.95, df=len(Income)-1,
+              loc=np.mean(Income),
+              scale=st.sem(Income))
+
+
+## Calculate confidence interval step by step
+sample_mean = np.mean(Income)
+
+alpha = 0.05
+
+df = len(Income)-1
+
+ 
+sample_sd = np.std(Income) * np.sqrt(len(Income)/(len(Income)-1))
+
+samplemean_sd = sample_sd / np.sqrt(len(Income))
+
+
+t_value =  st.t.ppf(1-alpha/2,df=df)
+
+
+Lower_limit = sample_mean - t_value * samplemean_sd
+
+Upper_limit = sample_mean + t_value * samplemean_sd
+
+print("Confidence Interval 100(1-0.05%")
+
+print([Lower_limit, Upper_limit])
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
