@@ -1171,3 +1171,71 @@ print([Lower_limit, Upper_limit])
 
 
 
+
+
+### Lecture 16. Levene’s Test for homogeneity of variance
+
+import pandas as pd
+import numpy as np
+import scipy.stats as stats
+
+group1 = [7, 14, 14, 13, 12, 9, 6, 14, 12, 8]
+group2 = [15, 17, 13, 15, 15, 13, 9, 12, 10, 8]
+group3 = [6, 8, 8, 9, 5, 14, 13, 8, 10, 9]
+
+
+alpha = 0.05
+# Levene's test centered at the mean
+lv_stats, p_value = stats.levene(group1, group2,group3, center='mean')
+ 
+if p_value > alpha:
+    print("We do not reject the null hypothesis")
+else:
+    print("Reject the Null Hypothesis")
+
+lv_stats
+
+p_value
+
+
+
+# Levene's test centered at the median
+lv_stats, p_value = stats.levene(group1, group2,group3, center='median')
+ 
+if p_value > alpha:
+    print("We do not reject the null hypothesis")
+else:
+    print("Reject the Null Hypothesis")
+
+
+lv_stats
+
+p_value
+
+
+
+#example with pandas dataframe
+
+data_set = {'Familymember': ['Wilson', 'Shirley', 'Dudu', 'Maomao', 'Miaomiao', 'Mico', 'Mia', 'Mimi'],
+            'Age' : [32,33,20, 22, 10,7, 3, 22],
+            'Gender': ['male','female','male','female','male','female','male','male'],
+            'City': ['Molde','Aukra','Molde','Molde','Aukra','Molde','Aukra','Molde'],
+            'Income' : [32000, 26000, 20000, 22000, 10000, 18000, 13000,20000 ],
+            'Cost' : [28000, 20000, 15000, 17000, 8000, 12000, 6000,8000]
+            }
+ 
+frame = pd.DataFrame(data_set)
+frame
+
+
+female_income = frame[frame['Gender']=='female']['Income']
+
+male_income = frame[frame['Gender']=='male']['Income']
+
+#Levene test
+stat, p_value = stats.levene(female_income, male_income, center='mean')
+
+print(f"Lavene's test statistic: {stat}")
+print(f"P-value: {p_value}")
+
+
