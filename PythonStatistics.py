@@ -1239,3 +1239,48 @@ print(f"Lavene's test statistic: {stat}")
 print(f"P-value: {p_value}")
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### Lecture 17. Point Biserial Correlation with Python
+
+import pandas as pd
+import numpy as np
+from scipy.stats import pointbiserialr
+
+data_set = {'Familymember': ['Wilson', 'Shirley', 'Dudu', 'Maomao', 'Miaomiao', 'Mico', 'Mia', 'Mimi'],
+            'Age' : [32,33,20, 22, 10,7, 3, 22],
+            'Gender': ['male','female','male','female','male','female','male','male'],
+            'City': ['Molde','Aukra','Molde','Molde','Aukra','Molde','Aukra','Molde'],
+            'Income' : [32000, 26000, 20000, 22000, 10000, 18000, 13000,20000 ],
+            'Cost' : [28000, 20000, 15000, 17000, 8000, 12000, 6000,8000]
+            }
+ 
+frame = pd.DataFrame(data_set)
+frame
+
+frame = frame.replace(['male','female'],[0,1])
+
+pbc = pointbiserialr(frame['Gender'],frame['Income'])
+print(pbc)
+
+
+
+
+
+
+
+
+
