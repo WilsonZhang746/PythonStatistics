@@ -1274,7 +1274,93 @@ frame
 frame = frame.replace(['male','female'],[0,1])
 
 pbc = pointbiserialr(frame['Gender'],frame['Income'])
-print(pbc)
+print(pbc)  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### Lecture 18. Mann-Whitney U Test 
+import scipy.stats as stats
+mpg_group1 = [20, 23, 21, 25, 18, 17, 18, 24, 20, 24, 23, 19]
+mpg_group2 = [24, 25, 21, 22, 23, 18, 17, 28, 24, 27, 21, 23]
+
+
+# mannwhitneyu(x, y, use_continuity=True)
+
+# where:
+
+# x: an array of sample observations from group 1
+# y: an array of sample observations from group 2
+# use_continuity: whether a continuity correction 1/2
+# should be taken into account. Default is True.
+
+
+#perform the Mann-Whitney U test
+stats.mannwhitneyu(mpg_group1, mpg_group2, alternative='two-sided')
+
+#the Mann-Whitney U Test uses the following null and alternative hypotheses:
+
+# H0: The mpg is equal between the two groups
+
+# HA: The mpg is not equal between the two groups
+
+# Since the p-value (0.2114) is not less than 0.05, we fail to
+# reject the null hypothesis.
+
+# This means we do not have sufficient evidence to say that the 
+# true mean mpg is different between the two groups.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
