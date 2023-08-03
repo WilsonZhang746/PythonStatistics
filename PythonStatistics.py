@@ -1352,6 +1352,90 @@ stats.mannwhitneyu(mpg_group1, mpg_group2, alternative='two-sided')
 
 
 
+### 19. F distribution and F-test 
+
+from scipy.stats import f
+import numpy as np 
+import matplotlib.pyplot as plt
+import scipy
+
+
+
+# PDF  probability density
+# f.pdf(quantile, df1,df2)
+
+
+x = np.linspace(0, 5, 100)
+  
+# Varying positional arguments
+y1 = f.pdf(x, 2, 6)
+plt.plot(x, y1, "*")
+
+
+#cdf, cumulative probability
+# cdf(quantile, df1,df2)
+
+
+y2 = f.cdf(x, 2, 6) 
+plt.plot(x, y2, "*")
+
+
+#ppf to calculate quantiles from given cumulative probabilites
+
+probs = np.arange (0.01, 1, 0.01)
+
+y3 = f.ppf(probs,2,6) 
+plt.plot(probs, y3,"*")
+
+
+
+#random number generation using f.rvs()
+
+y4 = f.rvs(2,6, size=10000)
+
+
+fig, ax = plt.subplots(figsize =(12, 9))
+ax.hist(y4, bins = [0, 0.5, 1.5, 2.5, 3.5, 4.5,5.0,5.5,6.0,6.5,7,7.5,8])
+
+  
+# Show plot
+plt.show()
+
+
+
+## F-Test
+
+# Create data
+group1 = [0.28, 0.2, 0.26, 0.28, 0.5]
+group2 = [0.2, 0.23, 0.26, 0.21, 0.23]
+  
+# converting the list to array
+x = np.array(group1)
+y = np.array(group2)
+  
+# calculate variance of each group
+print(np.var(group1), np.var(group2))
+  
+def f_test(group1, group2):
+    f = np.var(group1, ddof=1)/np.var(group2, ddof=1)
+    nun = x.size-1
+    dun = y.size-1
+    p_value = 1-scipy.stats.f.cdf(f, nun, dun)
+    return f, p_value
+  
+# perform F-test
+f_test(x, y)
+
+
+
+
+
+
+
+
+
+
+
 
 
 
