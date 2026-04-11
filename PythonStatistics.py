@@ -1119,6 +1119,7 @@ Income = [32000, 26000, 20000, 22000, 10000, 18000, 13000,20000, 56000, 32000, 2
   
 # create 95% confidence interval
 #using st.t.interval()
+#sem() is standard error of the mean
 st.t.interval(alpha=0.95, df=len(Income)-1,
               loc=np.mean(Income),
               scale=st.sem(Income))
@@ -1434,6 +1435,127 @@ f_test(x, y)
 
 
 
+
+###Generating and visualizing a normal distribution
+
+
+#Generating and Plotting Random Samples
+
+#This example uses numpy.random.normal() to generate a 
+#dataset of 1000 random values from a normal distribution
+# with a specified mean (loc) and standard deviation (scale), 
+#then visualizes it as a histogram using matplotlib. 
+
+
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Parameters for the distribution
+mu, sigma = 50, 10 # mean and standard deviation
+
+# Generate 10000 random samples from a normal distribution
+samples = np.random.normal(loc=mu, scale=sigma, size=10000)
+
+# Plot a histogram of the sampled data
+plt.hist(samples, bins=50, density=True, alpha=0.6, color='g')
+plt.title('Histogram of a Normal Distribution')
+plt.xlabel('Value')
+plt.ylabel('Density')
+plt.grid(True)
+plt.show()
+
+
+
+
+#Example 2: Plotting the Probability Density Function (PDF)
+
+#This example plots the theoretical bell curve (PDF) 
+#for a normal distribution using scipy.stats.norm.pdf() 
+#and matplotlib. This method allows plotting the smooth 
+#curve even without generating random data. 
+
+
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.stats import norm
+
+# Parameters for the distribution
+mean = 0
+std_dev = 1
+
+# Generate x values for the plot (range from mean - 4*std_dev to mean + 4*std_dev)
+x = np.linspace(mean - 4 * std_dev, mean + 4 * std_dev, 1000)
+
+# Calculate the probability density function (PDF) for each x value
+y = norm.pdf(x, loc=mean, scale=std_dev)
+
+# Plot the distribution curve
+plt.plot(x, y, color='blue', linewidth=2)
+plt.title('Theoretical Normal Distribution (PDF)')
+plt.xlabel('x')
+plt.ylabel('Probability Density')
+plt.grid(True)
+plt.show()
+
+
+
+
+
+#Example 3: Calculating Probabilities (CDF)
+
+#The scipy.stats.norm.cdf() function can calculate the 
+#cumulative distribution function (CDF), which gives the
+# probability of a value being less than or equal to a 
+#given point.
+
+
+from scipy.stats import norm
+
+# Example scenario: Student test scores with mean 78 and standard deviation 25
+mean = 78
+std_dev = 25
+
+# Calculate the percentage of students who scored less than 60 marks
+prob_less_than_60 = norm.cdf(60, loc=mean, scale=std_dev)
+print(f"Probability of scoring less than 60: {prob_less_than_60:.4f}")
+
+# Calculate the percentage of students who scored more than 70 marks
+prob_less_than_70 = norm.cdf(70, loc=mean, scale=std_dev)
+prob_more_than_70 = 1 - prob_less_than_70
+print(f"Probability of scoring more than 70: {prob_more_than_70:.4f}")
+
+
+
+
+
+
+
+
+
+### Type II Errors and Test Power with Python
+
+from statsmodels.stats import power
+
+#following code tells us that if we compare two groups 
+#with the same number of subjects and the same standard 
+#deviation, require an ˛ D 0:05 and a test power of 80 %, 
+#and we want to detect a difference between the groups 
+#that is half the standard deviation, we need to test 64 
+#subjects in each group. 
+
+nobs = power.tt_ind_solve_power(effect_size = 0.5, alpha =0.05, power=0.8 )
+
+nobs
+#following code tells us that if we have an alpha= 0:05, 
+#a test power of 80 %, and 25 subjects in each group, 
+#then the smallest difference between the groups is 81% of
+# the sample standard deviation.
+
+effect_size = power.tt_ind_solve_power(alpha =0.05, 
+                                       power=0.8, nobs1=25 )
+
+effect_size
 
 
 
