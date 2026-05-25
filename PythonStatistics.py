@@ -1564,6 +1564,46 @@ effect_size
 
 
 
+### Descriptive Statistics for Bivariate Quantitative Data
+#we show code to construct the scatterplot with the 
+#fitted regression line and find the correlation and
+#the linear regression parameter estimates:
+    
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+GS=pd.read_csv('http://stat4ds.rwth-aachen.de/data/Guns_Suicide.dat',
+sep='\s+')
+
+
+# number of non-missing values per variable
+GS.info()
+GS.head()
+
+GS.plot(kind='scatter',x='guns',y='suicide', color='blue', figsize=(10,7))
+plt.xlabel('guns',size=14)
+plt.ylabel('suicide',size=14)
+
+# correlation matrix
+GS[["guns","suicide"]].corr()
+
+import numpy as np
+
+#scatterplot with linear regression line
+coef=np.polyfit(GS['guns'],GS['suicide'], 1)
+LR_fn=np.poly1d(coef) # LR_fn: returns fittedy values
+fig=plt.figure(figsize=(10,7))  # submit next 4 lines together
+plt.plot(GS['guns'],GS['suicide'],'o',GS['guns'],LR_fn(GS['guns']))
+plt.xlabel('guns',size=14)
+plt.ylabel('suicide',size=14)
+
+
+import statsmodels.formula.api as sm
+#fit linear regression
+mod=sm.ols(formula='suicide~ guns', data=GS).fit()
+print(mod.params)    #model parameter estimates
+
+
 
 
 
