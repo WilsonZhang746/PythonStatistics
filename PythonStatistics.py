@@ -1608,6 +1608,91 @@ print(mod.params)    #model parameter estimates
 
 
 
+### Confusion matrix
+
+import matplotlib.pyplot as plt
+import pandas as pd
+from sklearn.metrics import confusion_matrix
+data = {'y_true': [1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0],
+'y_pred': [1, 1, 0, 1, 0, 1, 1, 0, 1, 0, 0, 0]}
+
+print("=> Data Values:")
+print(data)
+print()
+df = pd.DataFrame(data, columns=['y_true','y_pred'])
+print("=> DataFrame df:")
+print(df)
+print()
+
+#confusion matrix
+cm = pd.crosstab(df['y_true'], df['y_pred'],
+rownames=['Actual'], colnames=['Predicted'])
+print ("=> Confusion matrix:")
+print (cm)
+print()
+
+
+#alternative way
+cm = confusion_matrix(data['y_true'], data['y_pred'])
+print ("confusion matrix")
+print(cm)
+
+
+#normalized confusion matrix
+cm2 = confusion_matrix(data['y_true'], data['y_pred'],
+normalize='all')
+print ("=> Normalized confusion matrix, where the sum \
+     of the values in each row equals 1:")
+print (cm2)
+
+
+
+
+
+
+
+
+
+
+
+### Accuracy, Recall, Precision, Specificity
+
+import pandas as pd
+from sklearn.metrics import confusion_matrix
+from sklearn.metrics import accuracy_score
+from sklearn.metrics import recall_score
+from sklearn.metrics import precision_score
+data = {'y_true': [1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0],
+'y_pred': [1, 1, 0, 1, 0, 1, 1, 0, 1, 0, 0, 0]}
+
+
+print("=> Data Values:")
+print(data)
+print()
+df = pd.DataFrame(data, columns=['y_true','y_pred'])
+
+#confusion matrix
+cm = pd.crosstab(df['y_true'], df['y_pred'],
+rownames=['Actual'], colnames=['Predicted'])
+print ("=> Confusion matrix:")
+print (cm)
+print()
+
+#accuracy
+accuracy_score(df['y_true'], df['y_pred'])
+
+#recall
+recall_score(df['y_true'], df['y_pred'])
+
+#precision
+precision_score(df['y_true'], df['y_pred'])
+
+
+#specificity
+specificity = recall_score(df['y_true'], df['y_pred'], pos_label=0)
+print(f"Specificity: {specificity}")
+
+
 
 
 
