@@ -1701,3 +1701,35 @@ print(f"Specificity: {specificity}")
 
 
 
+
+
+### Generating Poisson probabilities
+
+
+from scipy import stats
+for kval in range (3,5):
+    for muval in range(2,5):
+        print("kval: ",kval," mu:", muval, "stats.poisson.pmf:", 
+              stats.poisson.pmf(k=kval, mu=muval))
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
